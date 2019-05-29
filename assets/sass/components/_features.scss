@@ -15,7 +15,7 @@
 		margin: 0 0 _size(element-margin) 0;
 
 		section {
-			@include padding(3em, 3em, (0.5em, 0, 0, 4em));
+			@include padding(1px, 1px, (0.5em, 0, 0, 4em));
 			width: 50%;
 			border-top: solid 1px _palette(border);
 			position: relative;
