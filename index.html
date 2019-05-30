@@ -20,14 +20,19 @@
 	<!-- Sidebar -->
 	<section id="sidebar">
 		<div class="inner">
+			<div style="display: block; text-align: center;">
+				<img id="logo-apoema" width="200" src="images/apoema.png">
+			</div>
+
+			</br>
 			<nav>
 				<ul>
-					<li><a href="#intro">Bem-Vindo</a></li>
-					<li><a href="#quemSomos">Quem Somos</a></li>
-					<li><a href="#oQueFazemos">O que Fazemos</a></li>
-					<li><a href="#noticias">Notícias</a></li>
-					<li><a href="#publicacoes">Publicações</a></li>
-					<li><a href="#contato">Contato</a></li>
+					<li><a href="#intro" class="tx-color">Bem-Vindo</a></li>
+					<li><a href="#quemSomos" class="tx-color">Quem Somos</a></li>
+					<li><a href="#oQueFazemos" class="tx-color">O que Fazemos</a></li>
+					<li><a href="#noticias" class="tx-color">Notícias</a></li>
+					<li><a href="#publicacoes" class="tx-color">Publicações</a></li>
+					<li><a href="#contato" class="tx-color">Contato</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -332,15 +337,15 @@
 			var template_id = "template_ugBJDSUe";
 
 			document.getElementById("card-feeback").style.display = "block";
-            document.getElementById("feedback-form").innerText = "Enviando contato...";
+			document.getElementById("feedback-form").innerText = "Enviando contato...";
 			emailjs.sendForm(service_id, template_id, myform[0])
 				.then(function () {
 					document.getElementById("card-feeback").style.backgroundColor = "green";
-                    document.getElementById("feedback-form").innerText = "Formulário enviado!";
-                    document.getElementById("myform").reset();
+					document.getElementById("feedback-form").innerText = "Formulário enviado!";
+					document.getElementById("myform").reset();
 				}, function (err) {
 					document.getElementById("card-feeback").style.backgroundColor = "red";
-                    document.getElementById("feedback-form").innerText = "Houve um erro ao enviar seu contato. Por favor, tente novamente!";
+					document.getElementById("feedback-form").innerText = "Houve um erro ao enviar seu contato. Por favor, tente novamente!";
 				});
 			return false;
 		});
