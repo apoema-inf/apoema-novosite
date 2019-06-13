@@ -13,6 +13,21 @@
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<noscript>
 		<link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+	<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		// TODO: Replace with your project's customized code snippet
+		var config = {
+			apiKey: "<API_KEY>",
+			authDomain: "<PROJECT_ID>.firebaseapp.com",
+			databaseURL: "https://<DATABASE_NAME>.firebaseio.com",
+			projectId: "<PROJECT_ID>",
+			storageBucket: "<BUCKET>.appspot.com",
+			messagingSenderId: "<SENDER_ID>",
+		};
+		firebase.initializeApp(config);
+	</script>
 </head>
 
 <body class="is-preload">
@@ -44,10 +59,10 @@
 		<!-- Intro -->
 		<section id="intro" class="wrapper style1 fullscreen fade-up">
 			<div class="inner">
-				<h1>Instituto Apoema</h1>
-				<p>Difundindo tecnologias inovadoras com qualidade e competência.</a></p>
+				<h1 class="ap-text-color">Instituto Apoema</h1>
+				<p class="ap-text-color">Difundindo tecnologias inovadoras com qualidade e competência.</a></p>
 				<ul class="actions">
-					<li><a href="#quemSomos" class="button scrolly">Ler mais</a></li>
+					<li><a href="#quemSomos" class="button scrolly" style="background-color:rgba(255, 255, 255, 0.15) !important">Ler mais</a></li>
 				</ul>
 			</div>
 		</section>
@@ -55,7 +70,6 @@
 		<!-- Quem Somos -->
 		<section id="quemSomos" class="wrapper style2 spotlights">
 			<section>
-				<a href="#" class="image"><img src="images/pic01.jpg" alt="" data-position="center center" /></a>
 				<div class="content">
 					<div class="inner">
 						<h2>Quem somos</h2>
@@ -102,15 +116,18 @@
 							<img src="images/logo-charset.png" height="100" />
 							<h3 style="color: #505050">Agenciamento</h3>
 							<br>
-							<a href="http://agenciamento.institutoapoema.org/#/home" target="_blank" class="button">Acesse</a>
+							<a href="http://agenciamento.institutoapoema.org/#/home" target="_blank"
+								class="button">Acesse</a>
 						</div>
 					</section>
 					<section>
 						<div class="col-2">
 							<img src="images/portfolio.png" height="100" />
-							<h3 style="color: #505050">Portfólio de projetos de pesquisa, desenvolvimento e inovação</h3>
+							<h3 style="color: #505050">Portfólio de projetos de pesquisa, desenvolvimento e inovação
+							</h3>
 							<br>
-							<a href="http://ppinf.institutoapoema.org/#/inicio" target="_blank" class="button">Acesse</a>
+							<a href="http://ppinf.institutoapoema.org/#/inicio" target="_blank"
+								class="button">Acesse</a>
 						</div>
 					</section>
 				</div>
@@ -176,9 +193,10 @@
 								empreendedorismo dentro e fora  da comunidade acadêmica, desenvolvendo , entre outras
 								ações, a promoção de cursos, oficinas, programas e palestras para a comunidade
 								acadêmica, empresas e outras organizações.</p>
-							Para conhecer mais sobre o trabalho desenvolvido pela CEI  <a
+								<p>Para conhecer mais sobre o trabalho desenvolvido pela CEI  <a
 								href="https://cei.ufg.br/">clique
-								aqui</a>.
+								aqui</a>.</p>
+							
 						</div>
 					</div>
 				</section>

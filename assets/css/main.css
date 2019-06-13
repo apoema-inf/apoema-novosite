@@ -58,7 +58,7 @@ blockquote, q {
 }
 
 .tx-color {
-	color: #23008c !important;
+	color: white !important;
 }
 
 	blockquote:before, blockquote:after, q:before, q:after {
@@ -90,6 +90,10 @@ input, select, textarea {
 	-webkit-appearance: none;
 	-ms-appearance: none;
 	appearance: none;
+}
+
+.ap-text-color {
+	color: #ffffff;
 }
 
 /* Basic */
@@ -136,7 +140,7 @@ input, select, textarea {
 /* Type */
 
 	body, input, select, textarea {
-		color: rgba(255, 255, 255, 0.55);
+		color:#002a5c;
 		font-family: Arial, Helvetica, sans-serif;
 		font-size: 16.5pt;
 		font-weight: normal;
@@ -196,7 +200,7 @@ input, select, textarea {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #ffffff;
+		color: #002a5c;
 		font-weight: bold;
 		line-height: 1.5;
 		margin: 0 0 0.5em 0;
@@ -1854,9 +1858,9 @@ input, select, textarea {
 		transition: border-color 0.2s ease;
 		background-color: transparent;
 		border: solid 1px !important;
-		border-color: rgba(255, 255, 255, 0.15) !important;
+		border-color: rgba(0, 42, 92, 0.15) !important;
 		border-radius: 3em;
-		color: #ffffff !important; /*Botão de 'Enviar Mensagem'*/
+		color: #002a5c !important; /*Botão de 'Enviar Mensagem'*/
 		cursor: pointer;
 		display: inline-block;
 		font-size: 0.6em;
@@ -1887,7 +1891,7 @@ input, select, textarea {
 			-webkit-transition: opacity 0.2s ease, -webkit-transform 0.2s ease;
 			-ms-transition: opacity 0.2s ease, -ms-transform 0.2s ease;
 			transition: opacity 0.2s ease, transform 0.2s ease;
-			background: #ffffff;
+			background: #002a5c;
 			border-radius: 3em;
 			content: '';
 			height: 100%;
@@ -1935,7 +1939,7 @@ input, select, textarea {
 		input[type="button"].primary,
 		button.primary,
 		.button.primary {
-			background-color: #ffffff;
+			background-color: #002a5c;
 			color: #ff6e00 !important;
 		}
 
@@ -1966,7 +1970,7 @@ input, select, textarea {
 		input[type="button"]:hover,
 		button:hover,
 		.button:hover {
-			border-color: rgba(255, 255, 255, 0.55) !important;
+			border-color: rgba(0, 42, 92, 0.55) !important;
 		}
 
 			input[type="submit"]:hover:after,
@@ -3275,7 +3279,7 @@ input, select, textarea {
 		}
 
 		.wrapper.style2 {
-			background-color: #23008c;
+			background-color:whitesmoke;
 		}
 
 		.wrapper.style2-alt {
@@ -3549,7 +3553,7 @@ input, select, textarea {
 
 	#sidebar {
 		padding: 2.5em 2.5em 0.5em 2.5em ;
-		background: #f5f2f1;
+		background-image: url('images/triangles.png');
 		cursor: default;
 		height: 100vh;
 		left: 0;
@@ -3764,7 +3768,7 @@ input, select, textarea {
 			border: 0;
 			color: rgba(255, 255, 255, 0.35);
 			display: block;
-			font-size: 0.6em;
+			font-size: 0.61em;
 			font-weight: bold;
 			letter-spacing: 0.25em;
 			line-height: 1.75;
@@ -3899,7 +3903,7 @@ input, select, textarea {
 
 	#intro {
 		background-attachment: fixed;
-		background-image: url("images/intro.svg");
+		background-image: url("images/girl.png");
 		background-position: top right;
 		background-repeat: no-repeat;
 		background-size: 100% 100%;
