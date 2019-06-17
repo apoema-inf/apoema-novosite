@@ -7,26 +7,40 @@
 <html>
 
 <head>
-	<title>Hyperspace by HTML5 UP</title>
+	<title>Apoema</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<noscript>
 		<link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
-	<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+	<!-- Add additional services that you want to use -->
+	<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-messaging.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-functions.js"></script>
+
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
 	<script>
-		// Initialize Firebase
-		// TODO: Replace with your project's customized code snippet
-		var config = {
-			apiKey: "<API_KEY>",
-			authDomain: "<PROJECT_ID>.firebaseapp.com",
-			databaseURL: "https://<DATABASE_NAME>.firebaseio.com",
-			projectId: "<PROJECT_ID>",
-			storageBucket: "<BUCKET>.appspot.com",
-			messagingSenderId: "<SENDER_ID>",
+		// Your web app's Firebase configuration
+		var firebaseConfig = {
+			apiKey: "AIzaSyD-R8yD4AbXD3SDZPj8LxKzBY8Izyk6nso",
+			authDomain: "apoema-site.firebaseapp.com",
+			databaseURL: "https://apoema-site.firebaseio.com",
+			projectId: "apoema-site",
+			storageBucket: "apoema-site.appspot.com",
+			messagingSenderId: "476386269549",
+			appId: "1:476386269549:web:9d4d86f8160e1cc3"
 		};
-		firebase.initializeApp(config);
+
+		firebase.initializeApp(firebaseConfig);
+
 	</script>
 </head>
 
@@ -62,7 +76,8 @@
 				<h1 class="ap-text-color">Instituto Apoema</h1>
 				<p class="ap-text-color">Difundindo tecnologias inovadoras com qualidade e competência.</a></p>
 				<ul class="actions">
-					<li><a href="#quemSomos" class="button scrolly" style="background-color:rgba(255, 255, 255, 0.15) !important">Ler mais</a></li>
+					<li><a href="#quemSomos" class="button scrolly"
+							style="background-color:rgba(255, 255, 255, 0.15) !important">Ler mais</a></li>
 				</ul>
 			</div>
 		</section>
@@ -173,40 +188,62 @@
 				<section>
 					<div class="content">
 						<div class="inner">
-							<h2>Representante da CEI visita o Instituto APOEMA</h2>
+							<h2 id="titulo">Representante da CEI visita o Instituto APOEMA</h2>
 							<h5><img src="images/clock.png" />27 de fevereiro de 2019</h5>
-							<p class="tx-justify"><span class="image left"><img
-										class="aligncenter size-full wp-image-417"
-										src="http://apoema.inf.ufg.br/noticias/wp-content/uploads/2019/02/f1b86aa2-2ea6-42a7-9e83-0d2211ff4e20.jpg"
-										alt="f1b86aa2-2ea6-42a7-9e83-0d2211ff4e20" /></span>O Instituto APOEMA
-								Tecnologia e Inovação recebeu nesta terça-feira a gerente do Centro de Empreendedorismo
-								e Incubação (CEI) Emília Rosângela Pires da Silva. A visita institucional teve como
-								intuito
-								estimular a aproximação entre os Órgãos, de modo a possibilitar a articulação de ações
-								conjuntas
-								que proporcionem o desenvolvimento tecnológico, a inovação e o empreendedorismo.</p>
-							<p class="tx-justify">Transformar o conhecimento aplicado em inovação tecnológica
-								é um dos valores compartilhados tanto pela CEI quanto pelo Instituto APOEMA, sendo esse
-								o ponto de partida para que futuras atividades cooperativas sejam estabelecidas.</p>
-							<p class="tx-justify"><strong>Sobre a CEI</strong></p>
-							<p class="tx-justify">O CEI é uma instituição que promove a cultura do
-								empreendedorismo dentro e fora  da comunidade acadêmica, desenvolvendo , entre outras
-								ações, a promoção de cursos, oficinas, programas e palestras para a comunidade
-								acadêmica, empresas e outras organizações.</p>
+							<p id="descricao">
+								<p class="tx-justify"><span class="image left"><img
+											class="aligncenter size-full wp-image-417"
+											src="http://apoema.inf.ufg.br/noticias/wp-content/uploads/2019/02/f1b86aa2-2ea6-42a7-9e83-0d2211ff4e20.jpg"
+											alt="f1b86aa2-2ea6-42a7-9e83-0d2211ff4e20" /></span>O Instituto APOEMA
+									Tecnologia e Inovação recebeu nesta terça-feira a gerente do Centro de
+									Empreendedorismo
+									e Incubação (CEI) Emília Rosângela Pires da Silva. A visita institucional teve como
+									intuito
+									estimular a aproximação entre os Órgãos, de modo a possibilitar a articulação de
+									ações
+									conjuntas
+									que proporcionem o desenvolvimento tecnológico, a inovação e o empreendedorismo.</p>
+								<p class="tx-justify">Transformar o conhecimento aplicado em inovação tecnológica
+									é um dos valores compartilhados tanto pela CEI quanto pelo Instituto APOEMA, sendo
+									esse
+									o ponto de partida para que futuras atividades cooperativas sejam estabelecidas.</p>
+								<p class="tx-justify"><strong>Sobre a CEI</strong></p>
+								<p class="tx-justify">O CEI é uma instituição que promove a cultura do
+									empreendedorismo dentro e fora  da comunidade acadêmica, desenvolvendo , entre
+									outras
+									ações, a promoção de cursos, oficinas, programas e palestras para a comunidade
+									acadêmica, empresas e outras organizações.</p>
 								<p>Para conhecer mais sobre o trabalho desenvolvido pela CEI  <a
-								href="https://cei.ufg.br/">clique
-								aqui</a>.</p>
-							
+										href="https://cei.ufg.br/">clique
+										aqui</a>.</p>
+							</p>
 						</div>
 					</div>
 				</section>
 			</section>
 			<section class="wrapper style2 spotlights">
 				<div class="col-2" style="text-align: right; margin: 6px">
-					<a target="_blank" class="button">Anterior</a>
+					<a target="_blank" class="button" onclick="buscaNoticias()">Anterior</a>
 				</div>
 			</section>
 		</section>
+
+		<script>
+			function buscaNoticias() {
+				var db = firebase.firestore();
+
+				var arrayNoticias = [];
+				db.collection("noticias").get().then((querySnapshot) => {
+					querySnapshot.forEach((doc) => {
+						arrayNoticias.push(doc.data());
+					});
+				}).then(data => {
+					console.log(arrayNoticias[0]);
+				})
+
+				
+			}
+		</script>
 
 		<!-- Publicações -->
 		<section id="publicacoes" class="wrapper style3 fade-up">
