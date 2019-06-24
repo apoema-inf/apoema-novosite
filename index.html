@@ -41,6 +41,33 @@
 
 		firebase.initializeApp(firebaseConfig);
 
+		var db = firebase.firestore();
+
+		var arrayNoticias = [];
+		var cont = 0;
+		const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio",
+			"Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+		db.collection("noticias").get().then((querySnapshot) => {
+			querySnapshot.forEach((doc) => {
+				arrayNoticias.push(doc.data());
+			});
+		}).then(data => {
+			if (arrayNoticias && arrayNoticias.length) {
+				cont = 0;
+				document.getElementById("tituloNoticia1").innerHTML = arrayNoticias[cont].titulo;
+				document.getElementById("descricaoNoticia1").innerHTML = arrayNoticias[cont].descricao;
+				var data = arrayNoticias[cont].data_publicacao.toDate();
+				document.getElementById("dataPublicacaoNoticia1").innerHTML = data.getDate() + ' de ' + months[data.getMonth()] + ' de ' + data.getFullYear();
+				document.getElementById("autorPublicacaoNoticia1").innerHTML = 'Por: ' + arrayNoticias[cont].autor;
+				cont++;
+				document.getElementById("tituloNoticia2").innerHTML = arrayNoticias[cont].titulo;
+				document.getElementById("descricaoNoticia2").innerHTML = arrayNoticias[cont].descricao;
+				data = arrayNoticias[cont].data_publicacao.toDate();
+				document.getElementById("dataPublicacaoNoticia2").innerHTML = data.getDate() + ' de ' + months[data.getMonth()] + ' de ' + data.getFullYear();
+				document.getElementById("autorPublicacaoNoticia2").innerHTML = 'Por: ' + arrayNoticias[cont].autor;
+				cont++;
+			}
+		})
 	</script>
 </head>
 
@@ -165,83 +192,75 @@
 				<section>
 					<div class="content">
 						<div class="inner">
-							<h2>Servidora do APOEMA passa em 1° lugar no Mestrado</h2>
-							<h5><img src="images/clock.png" />28 de fevereiro de 2019</h5>
-							<p class="tx-justify"><span class="image left"><img class="size-full wp-image-435" style="max-width:250px;
-								max-height:250px;
-								width: auto;
-								height: auto;" src="http://apoema.inf.ufg.br/noticias/wp-content/uploads/2019/05/ketlyn.jpeg"
-										alt="Ketlyn Alves Gonçalves" /></span>Ketlyn Alves Gonçalves, contadora do
-								APOEMA Tecnologia e Inovação, alcançou a primeira colocação no processo seletivo do
-								<em>PPGCC</em> (Programa
-								de Pós-Graduação em Ciências Contábeis). O resultado do processo seletivo do mestrado em
-								contabilidade financeira da UFG, publicado hoje (28), trouxe a tão esperada
-								classificação a de nossa servidora.</p>
-							<p style="text-align: justify;">Felicitamos a conquista de Ketlyn e desejamos  que seu
-								carácter e competência continuem sendo um reflexo em sua vida.<a
-									href="http://apoema.inf.ufg.br/noticias/wp-content/uploads/2019/02/WhatsApp-Image-2019-02-28-at-16.47.17-2.jpeg"
-									rel="attachment wp-att-435">
-								</a></p>
+							<h2 id="tituloNoticia1"></h2>
+							<table style="width: 65%">
+								<tr>
+									<th>
+										<h5 id="dataPublicacaoNoticia1"></h5>
+									</th>
+									<th>
+										<h5 id="autorPublicacaoNoticia1"></h5>
+									</th>
+								</tr>
+							</table>
+							<span class="image left"><img class="size-full wp-image-435" style="max-width:250px;
+								max-height:250px; width: auto; height: auto;"
+									src="http://apoema.inf.ufg.br/noticias/wp-content/uploads/2019/05/ketlyn.jpeg"
+									alt="Ketlyn Alves Gonçalves" /></span>
+							<p id="descricaoNoticia1" class="tx-justify"></p>
 						</div>
 					</div>
 				</section>
 				<section>
 					<div class="content">
 						<div class="inner">
-							<h2 id="titulo">Representante da CEI visita o Instituto APOEMA</h2>
-							<h5><img src="images/clock.png" />27 de fevereiro de 2019</h5>
-							<p id="descricao">
-								<p class="tx-justify"><span class="image left"><img
-											class="aligncenter size-full wp-image-417"
-											src="http://apoema.inf.ufg.br/noticias/wp-content/uploads/2019/02/f1b86aa2-2ea6-42a7-9e83-0d2211ff4e20.jpg"
-											alt="f1b86aa2-2ea6-42a7-9e83-0d2211ff4e20" /></span>O Instituto APOEMA
-									Tecnologia e Inovação recebeu nesta terça-feira a gerente do Centro de
-									Empreendedorismo
-									e Incubação (CEI) Emília Rosângela Pires da Silva. A visita institucional teve como
-									intuito
-									estimular a aproximação entre os Órgãos, de modo a possibilitar a articulação de
-									ações
-									conjuntas
-									que proporcionem o desenvolvimento tecnológico, a inovação e o empreendedorismo.</p>
-								<p class="tx-justify">Transformar o conhecimento aplicado em inovação tecnológica
-									é um dos valores compartilhados tanto pela CEI quanto pelo Instituto APOEMA, sendo
-									esse
-									o ponto de partida para que futuras atividades cooperativas sejam estabelecidas.</p>
-								<p class="tx-justify"><strong>Sobre a CEI</strong></p>
-								<p class="tx-justify">O CEI é uma instituição que promove a cultura do
-									empreendedorismo dentro e fora  da comunidade acadêmica, desenvolvendo , entre
-									outras
-									ações, a promoção de cursos, oficinas, programas e palestras para a comunidade
-									acadêmica, empresas e outras organizações.</p>
-								<p>Para conhecer mais sobre o trabalho desenvolvido pela CEI  <a
-										href="https://cei.ufg.br/">clique
-										aqui</a>.</p>
-							</p>
+							<h2 id="tituloNoticia2"></h2>
+							<table style="width: 65%">
+								<tr>
+									<th>
+										<h5 id="dataPublicacaoNoticia2"></h5>
+									</th>
+									<th>
+										<h5 id="autorPublicacaoNoticia2"></h5>
+									</th>
+								</tr>
+							</table>
+							<span class="image left"><img class="size-full wp-image-435" style="max-width:250px;
+								max-height:250px; width: auto; height: auto;"
+									src="http://apoema.inf.ufg.br/noticias/wp-content/uploads/2019/05/ketlyn.jpeg"
+									alt="Ketlyn Alves Gonçalves" /></span>
+							<p id="descricaoNoticia2" class="tx-justify"></p>
 						</div>
 					</div>
 				</section>
 			</section>
 			<section class="wrapper style2 spotlights">
 				<div class="col-2" style="text-align: right; margin: 6px">
-					<a target="_blank" class="button" onclick="buscaNoticias()">Anterior</a>
+					<a target="_blank" class="button" onclick="buscaNoticiasAnterior()">Anterior</a>
 				</div>
 			</section>
 		</section>
 
 		<script>
-			function buscaNoticias() {
-				var db = firebase.firestore();
-
-				var arrayNoticias = [];
-				db.collection("noticias").get().then((querySnapshot) => {
-					querySnapshot.forEach((doc) => {
-						arrayNoticias.push(doc.data());
-					});
-				}).then(data => {
-					console.log(arrayNoticias[0]);
-				})
-
-				
+			function buscaNoticiasAnterior() {
+				if (arrayNoticias && arrayNoticias.length) {
+					if (cont <= arrayNoticias.length) {
+						document.getElementById("tituloNoticia1").innerHTML = arrayNoticias[cont].titulo;
+						document.getElementById("descricaoNoticia1").innerHTML = arrayNoticias[cont].descricao;
+						var data = arrayNoticias[cont].data_publicacao.toDate();
+						document.getElementById("dataPublicacaoNoticia1").innerHTML = data.getDate() + ' de ' + months[data.getMonth()] + ' de ' + data.getFullYear();
+						document.getElementById("autorPublicacaoNoticia1").innerHTML = 'Por: ' + arrayNoticias[cont].autor;
+						cont++;
+					}
+					if (cont <= arrayNoticias.length) {
+						document.getElementById("tituloNoticia2").innerHTML = arrayNoticias[cont].titulo;
+						document.getElementById("descricaoNoticia2").innerHTML = arrayNoticias[cont].descricao;
+						data = arrayNoticias[cont].data_publicacao.toDate();
+						document.getElementById("dataPublicacaoNoticia2").innerHTML = data.getDate() + ' de ' + months[data.getMonth()] + ' de ' + data.getFullYear();
+						document.getElementById("autorPublicacaoNoticia2").innerHTML = 'Por: ' + arrayNoticias[cont].autor;
+						cont++;
+					}
+				}
 			}
 		</script>
 
@@ -287,9 +306,11 @@
 					</div>
 				</section>
 			</section>
-			<ul class="actions">
-				<li><a class="button scrolly">Anterior</a></li>
-			</ul>
+			<!--<section>
+				<div class="col-2" style="text-align: right; margin: 6px; margin-bottom: 6px;">
+					<a target="_blank" class="button" onclick="buscaNoticias()">Anterior</a>
+				</div>
+			</section>-->
 		</section>
 
 		<!-- Contato -->
