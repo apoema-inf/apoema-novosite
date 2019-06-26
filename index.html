@@ -47,25 +47,32 @@
 		var cont = 0;
 		const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio",
 			"Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
-		db.collection("noticias").get().then((querySnapshot) => {
+		db.collection("noticias").orderBy("data_publicacao", "desc").get().then((querySnapshot) => {
 			querySnapshot.forEach((doc) => {
 				arrayNoticias.push(doc.data());
 			});
-		}).then(data => {
+		}).then(foo => {
 			if (arrayNoticias && arrayNoticias.length) {
-				cont = 0;
+				/*Se tem apenas duas notícias cadastradas*/
+				if(arrayNoticias.length == 2){
+					document.getElementById("btnProximo").style.visibility = "hidden";
+					document.getElementById("btnAnterior").style.visibility = "hidden";
+				}
 				document.getElementById("tituloNoticia1").innerHTML = arrayNoticias[cont].titulo;
 				document.getElementById("descricaoNoticia1").innerHTML = arrayNoticias[cont].descricao;
 				var data = arrayNoticias[cont].data_publicacao.toDate();
 				document.getElementById("dataPublicacaoNoticia1").innerHTML = data.getDate() + ' de ' + months[data.getMonth()] + ' de ' + data.getFullYear();
 				document.getElementById("autorPublicacaoNoticia1").innerHTML = 'Por: ' + arrayNoticias[cont].autor;
+				document.getElementById("imagemNoticia1").setAttribute("src", arrayNoticias[cont].imagem);
+				console.log(arrayNoticias[cont].imagem);
 				cont++;
 				document.getElementById("tituloNoticia2").innerHTML = arrayNoticias[cont].titulo;
 				document.getElementById("descricaoNoticia2").innerHTML = arrayNoticias[cont].descricao;
 				data = arrayNoticias[cont].data_publicacao.toDate();
 				document.getElementById("dataPublicacaoNoticia2").innerHTML = data.getDate() + ' de ' + months[data.getMonth()] + ' de ' + data.getFullYear();
 				document.getElementById("autorPublicacaoNoticia2").innerHTML = 'Por: ' + arrayNoticias[cont].autor;
-				cont++;
+				document.getElementById("btnProximo").style.visibility = "hidden";
+				document.getElementById("imagemNoticia2").setAttribute("src", arrayNoticias[cont].imagem);
 			}
 		})
 	</script>
@@ -203,10 +210,7 @@
 									</th>
 								</tr>
 							</table>
-							<span class="image left"><img class="size-full wp-image-435" style="max-width:250px;
-								max-height:250px; width: auto; height: auto;"
-									src="http://apoema.inf.ufg.br/noticias/wp-content/uploads/2019/05/ketlyn.jpeg"
-									alt="Ketlyn Alves Gonçalves" /></span>
+							<img id="imagemNoticia1" class="image left" alt="" />
 							<p id="descricaoNoticia1" class="tx-justify"></p>
 						</div>
 					</div>
@@ -225,18 +229,18 @@
 									</th>
 								</tr>
 							</table>
-							<span class="image left"><img class="size-full wp-image-435" style="max-width:250px;
-								max-height:250px; width: auto; height: auto;"
-									src="http://apoema.inf.ufg.br/noticias/wp-content/uploads/2019/05/ketlyn.jpeg"
-									alt="Ketlyn Alves Gonçalves" /></span>
+							<img id="imagemNoticia2" class="image left" alt="" />
 							<p id="descricaoNoticia2" class="tx-justify"></p>
 						</div>
 					</div>
 				</section>
-			</section>
-			<section class="wrapper style2 spotlights">
-				<div class="col-2" style="text-align: right; margin: 6px">
-					<a target="_blank" class="button" onclick="buscaNoticiasAnterior()">Anterior</a>
+				<div class="ap-div-button">
+					<div style="float: left;">
+						<a id="btnProximo" class="button" onclick="buscaNoticiaProximo()">Próximo</a>
+					</div>
+					<div style="float: right;">
+						<a id="btnAnterior" class="button" onclick="buscaNoticiasAnterior()">Anterior</a>
+					</div>
 				</div>
 			</section>
 		</section>
@@ -244,48 +248,74 @@
 		<script>
 			function buscaNoticiasAnterior() {
 				if (arrayNoticias && arrayNoticias.length) {
-					if (cont <= arrayNoticias.length) {
+					if (cont <= arrayNoticias.length - 1) {
 						document.getElementById("tituloNoticia1").innerHTML = arrayNoticias[cont].titulo;
 						document.getElementById("descricaoNoticia1").innerHTML = arrayNoticias[cont].descricao;
 						var data = arrayNoticias[cont].data_publicacao.toDate();
 						document.getElementById("dataPublicacaoNoticia1").innerHTML = data.getDate() + ' de ' + months[data.getMonth()] + ' de ' + data.getFullYear();
 						document.getElementById("autorPublicacaoNoticia1").innerHTML = 'Por: ' + arrayNoticias[cont].autor;
-						cont++;
+						document.getElementById("imagemNoticia1").setAttribute("src", arrayNoticias[cont].imagem);
 					}
-					if (cont <= arrayNoticias.length) {
+					cont++;
+					if (cont <= arrayNoticias.length - 1) {
 						document.getElementById("tituloNoticia2").innerHTML = arrayNoticias[cont].titulo;
 						document.getElementById("descricaoNoticia2").innerHTML = arrayNoticias[cont].descricao;
 						data = arrayNoticias[cont].data_publicacao.toDate();
 						document.getElementById("dataPublicacaoNoticia2").innerHTML = data.getDate() + ' de ' + months[data.getMonth()] + ' de ' + data.getFullYear();
 						document.getElementById("autorPublicacaoNoticia2").innerHTML = 'Por: ' + arrayNoticias[cont].autor;
-						cont++;
+						document.getElementById("imagemNoticia2").setAttribute("src", arrayNoticias[cont].imagem);
 					}
+
+					if (cont == arrayNoticias.length) {
+						document.getElementById("btnAnterior").style.visibility = "hidden";
+						cont = arrayNoticias.length - 1;
+					}
+					document.getElementById('btnProximo').style.visibility = 'visible';
+				}
+			}
+
+			function buscaNoticiaProximo() {
+				if (arrayNoticias && arrayNoticias.length) {
+					if(cont == arrayNoticias.length - 1){
+						cont--;
+					}
+
+					if (cont >= 0) {
+						document.getElementById("btnAnterior").style.visibility = "visible";
+						document.getElementById("tituloNoticia2").innerHTML = arrayNoticias[cont].titulo;
+						document.getElementById("descricaoNoticia2").innerHTML = arrayNoticias[cont].descricao;
+						var data = arrayNoticias[cont].data_publicacao.toDate();
+						document.getElementById("dataPublicacaoNoticia2").innerHTML = data.getDate() + ' de ' + months[data.getMonth()] + ' de ' + data.getFullYear();
+						document.getElementById("autorPublicacaoNoticia2").innerHTML = 'Por: ' + arrayNoticias[cont].autor;
+						document.getElementById("imagemNoticia2").setAttribute("src", arrayNoticias[cont].imagem);
+					}
+					cont--;
+					if (cont >= 0) {
+						document.getElementById("tituloNoticia1").innerHTML = arrayNoticias[cont].titulo;
+						document.getElementById("descricaoNoticia1").innerHTML = arrayNoticias[cont].descricao;
+						data = arrayNoticias[cont].data_publicacao.toDate();
+						document.getElementById("dataPublicacaoNoticia1").innerHTML = data.getDate() + ' de ' + months[data.getMonth()] + ' de ' + data.getFullYear();
+						document.getElementById("autorPublicacaoNoticia1").innerHTML = 'Por: ' + arrayNoticias[cont].autor;
+						document.getElementById("imagemNoticia1").setAttribute("src", arrayNoticias[cont].imagem);
+					}
+
+					if(cont <= 0){
+						document.getElementById("btnProximo").style.visibility = "hidden";
+						cont = 0;
+					}
+
 				}
 			}
 		</script>
+
 
 		<!-- Publicações -->
 		<section id="publicacoes" class="wrapper style3 fade-up">
 			<section class="wrapper style3 spotlights">
 				<section>
 					<div class="content">
-						<div class="inner">
-							<h2>Primeiro Workshop Technable</h2>
-							<h5><img src="images/clock.png" />27 de fevereiro de 2019</h5>
-
-							<p class="tx-justify"><span class="image left"><img
-										class="aligncenter size-full wp-image-430"
-										src="http://apoema.inf.ufg.br/noticias/wp-content/uploads/2019/02/WhatsApp-Image-2019-02-26-at-15.30.37-2.jpeg"
-										alt="WhatsApp Image 2019-02-26 at 15.30.37 (2)"
-										data-position="center center" /></span>Realizou-se em Brasília,
-								durante os dias 21 e 22 de fevereiro, o
-								primeiro Workshop Technable, destinado ao aprimoramento tecnológico corporativo.
-								Resultado de ação cooperativa entre o Prof. Dr. Luís Fernando Ramos Molinaro, da
-								Faculdade de Tecnologia/UnB, e o coordenador do Instituto APOEMA, Prof. Dr. Eliomar
-								Araújo de Lima, o o evento trouxe como tema os "<em>Desafios e Oportunidades do Setor
-									Público Ante às Novas Tecnologias da Informação e de Dados"</em>.
-								O workshop contou com a apresentação de trabalhos, palestras e mesa redonda para
-								discussão da temática.</p>
+						<div class="wrapper">
+								<p><img class="image left" src="images/pic05.jpg" alt="" />Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
 						</div>
 					</div>
 				</section>

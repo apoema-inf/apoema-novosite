@@ -96,6 +96,21 @@ input, select, textarea {
 	color: #ffffff;
 }
 
+.ap-div-button {
+	width: 100%;
+	display:inline-block;
+	overflow: auto;
+	white-space: nowrap;
+	margin: 10px auto;
+}
+
+.ap-img-size {
+	max-width:50px !important;
+	max-height:50px !important; 
+	width: auto !important; 
+	height: auto !important;
+}
+
 /* Basic */
 
 	@-ms-viewport {
@@ -2597,7 +2612,7 @@ input, select, textarea {
 		}
 
 		.image.left, .image.right {
-			max-width: 40%;
+			max-width: 20%;
 		}
 
 			.image.left img, .image.right img {
