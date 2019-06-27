@@ -47,6 +47,7 @@
 		var cont = 0;
 		const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio",
 			"Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+		
 		db.collection("noticias").orderBy("data_publicacao", "desc").get().then((querySnapshot) => {
 			querySnapshot.forEach((doc) => {
 				arrayNoticias.push(doc.data());
@@ -54,7 +55,7 @@
 		}).then(foo => {
 			if (arrayNoticias && arrayNoticias.length) {
 				/*Se tem apenas duas notícias cadastradas*/
-				if(arrayNoticias.length == 2){
+				if (arrayNoticias.length == 2) {
 					document.getElementById("btnProximo").style.visibility = "hidden";
 					document.getElementById("btnAnterior").style.visibility = "hidden";
 				}
@@ -64,7 +65,6 @@
 				document.getElementById("dataPublicacaoNoticia1").innerHTML = data.getDate() + ' de ' + months[data.getMonth()] + ' de ' + data.getFullYear();
 				document.getElementById("autorPublicacaoNoticia1").innerHTML = 'Por: ' + arrayNoticias[cont].autor;
 				document.getElementById("imagemNoticia1").setAttribute("src", arrayNoticias[cont].imagem);
-				console.log(arrayNoticias[cont].imagem);
 				cont++;
 				document.getElementById("tituloNoticia2").innerHTML = arrayNoticias[cont].titulo;
 				document.getElementById("descricaoNoticia2").innerHTML = arrayNoticias[cont].descricao;
@@ -75,6 +75,37 @@
 				document.getElementById("imagemNoticia2").setAttribute("src", arrayNoticias[cont].imagem);
 			}
 		})
+
+		var arrayPublicacoes = [];
+		var contP = 0;
+		db.collection("publicacoes").orderBy("data_publicacao", "desc").get().then((querySnapshot) => {
+			querySnapshot.forEach((doc) => {
+				arrayPublicacoes.push(doc.data());
+			});
+		}).then(foo => {
+			if (arrayPublicacoes && arrayPublicacoes.length) {
+				/*Se tem apenas duas publicações cadastradas*/
+				if (arrayPublicacoes.length == 2) {
+					document.getElementById("btnProximoPublicacoes").style.visibility = "hidden";
+					document.getElementById("btnAnteriorPublicacoes").style.visibility = "hidden";
+				}
+				document.getElementById("tituloPublicacoes1").innerHTML = arrayPublicacoes[contP].titulo;
+				document.getElementById("descricaoPublicacoes1").innerHTML = arrayPublicacoes[contP].descricao;
+				var data = arrayPublicacoes[cont].data_publicacao.toDate();
+				document.getElementById("dataPublicacaoPublicacoes1").innerHTML = data.getDate() + ' de ' + months[data.getMonth()] + ' de ' + data.getFullYear();
+				document.getElementById("autorPublicacaoPublicacoes1").innerHTML = 'Por: ' + arrayPublicacoes[contP].autor;
+				document.getElementById("imagemPublicacoes1").setAttribute("src", arrayPublicacoes[contP].imagem);
+				cont++;
+				document.getElementById("tituloPublicacoes2").innerHTML = arrayPublicacoes[contP].titulo;
+				document.getElementById("descricaoPublicacoes2").innerHTML = arrayPublicacoes[contP].descricao;
+				data = arrayPublicacoes[contP].data_publicacao.toDate();
+				document.getElementById("dataPublicacaoPublicacoes2").innerHTML = data.getDate() + ' de ' + months[data.getMonth()] + ' de ' + data.getFullYear();
+				document.getElementById("autorPublicacaoPublicacoes2").innerHTML = 'Por: ' + arrayPublicacoes[contP].autor;
+				document.getElementById("btnProximoPublicacoes").style.visibility = "hidden";
+				document.getElementById("imagemPublicacoes2").setAttribute("src", arrayPublicacoes[contP].imagem);
+			}
+		})
+
 	</script>
 </head>
 
@@ -276,7 +307,7 @@
 
 			function buscaNoticiaProximo() {
 				if (arrayNoticias && arrayNoticias.length) {
-					if(cont == arrayNoticias.length - 1){
+					if (cont == arrayNoticias.length - 1) {
 						cont--;
 					}
 
@@ -299,8 +330,69 @@
 						document.getElementById("imagemNoticia1").setAttribute("src", arrayNoticias[cont].imagem);
 					}
 
-					if(cont <= 0){
+					if (cont <= 0) {
 						document.getElementById("btnProximo").style.visibility = "hidden";
+						cont = 0;
+					}
+
+				}
+			}
+
+			function buscaPublicacoesAnterior() {
+				if (arrayNoticias && arrayNoticias.length) {
+					if (cont <= arrayNoticias.length - 1) {
+						document.getElementById("tituloNoticia1").innerHTML = arrayNoticias[cont].titulo;
+						document.getElementById("descricaoNoticia1").innerHTML = arrayNoticias[cont].descricao;
+						var data = arrayNoticias[cont].data_publicacao.toDate();
+						document.getElementById("dataPublicacaoNoticia1").innerHTML = data.getDate() + ' de ' + months[data.getMonth()] + ' de ' + data.getFullYear();
+						document.getElementById("autorPublicacaoNoticia1").innerHTML = 'Por: ' + arrayNoticias[cont].autor;
+						document.getElementById("imagemNoticia1").setAttribute("src", arrayNoticias[cont].imagem);
+					}
+					cont++;
+					if (cont <= arrayNoticias.length - 1) {
+						document.getElementById("tituloNoticia2").innerHTML = arrayNoticias[cont].titulo;
+						document.getElementById("descricaoNoticia2").innerHTML = arrayNoticias[cont].descricao;
+						data = arrayNoticias[cont].data_publicacao.toDate();
+						document.getElementById("dataPublicacaoNoticia2").innerHTML = data.getDate() + ' de ' + months[data.getMonth()] + ' de ' + data.getFullYear();
+						document.getElementById("autorPublicacaoNoticia2").innerHTML = 'Por: ' + arrayNoticias[cont].autor;
+						document.getElementById("imagemNoticia2").setAttribute("src", arrayNoticias[cont].imagem);
+					}
+
+					if (cont == arrayNoticias.length) {
+						document.getElementById("btnAnterior").style.visibility = "hidden";
+						cont = arrayNoticias.length - 1;
+					}
+					document.getElementById('btnProximo').style.visibility = 'visible';
+				}
+			}
+
+			function buscaPublicacoesProximo() {
+				if (arrayNoticias && arrayNoticias.length) {
+					if (cont == arrayNoticias.length - 1) {
+						cont--;
+					}
+
+					if (cont >= 0) {
+						document.getElementById("btnAnteriorPublicacoes").style.visibility = "visible";
+						document.getElementById("tituloNoticia2").innerHTML = arrayNoticias[cont].titulo;
+						document.getElementById("descricaoNoticia2").innerHTML = arrayNoticias[cont].descricao;
+						var data = arrayNoticias[cont].data_publicacao.toDate();
+						document.getElementById("dataPublicacaoNoticia2").innerHTML = data.getDate() + ' de ' + months[data.getMonth()] + ' de ' + data.getFullYear();
+						document.getElementById("autorPublicacaoNoticia2").innerHTML = 'Por: ' + arrayNoticias[cont].autor;
+						document.getElementById("imagemPublicacoes2").setAttribute("src", arrayNoticias[cont].imagem);
+					}
+					cont--;
+					if (cont >= 0) {
+						document.getElementById("tituloNoticia1").innerHTML = arrayNoticias[cont].titulo;
+						document.getElementById("descricaoNoticia1").innerHTML = arrayNoticias[cont].descricao;
+						data = arrayNoticias[cont].data_publicacao.toDate();
+						document.getElementById("dataPublicacaoNoticia1").innerHTML = data.getDate() + ' de ' + months[data.getMonth()] + ' de ' + data.getFullYear();
+						document.getElementById("autorPublicacaoNoticia1").innerHTML = 'Por: ' + arrayNoticias[cont].autor;
+						document.getElementById("imagemNoticia1").setAttribute("src", arrayNoticias[cont].imagem);
+					}
+
+					if (cont <= 0) {
+						document.getElementById("btnProximoPublicacoes").style.visibility = "hidden";
 						cont = 0;
 					}
 
@@ -314,94 +406,51 @@
 			<section class="wrapper style3 spotlights">
 				<section>
 					<div class="content">
-						<div class="wrapper">
-								<p><img class="image left" src="images/pic05.jpg" alt="" />Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
+						<div class="inner">
+							<h2 id="tituloPublicacoes1"></h2>
+							<table style="width: 65%; border: none !important;">
+								<tr>
+									<th>
+										<h5 id="dataPublicacaoPublicacoes1"></h5>
+									</th>
+									<th>
+										<h5 id="autorPublicacaoPublicacoes1"></h5>
+									</th>
+								</tr>
+							</table>
+							<img id="imagemPublicacoes1" class="image left" alt="" />
+							<p id="descricaoPublicacoes1" class="tx-justify"></p>
 						</div>
 					</div>
 				</section>
 				<section>
 					<div class="content">
 						<div class="inner">
-							<h2>Processo seletivo para Bolsa Universitária - Função de design</h2>
-							<h5><img src="images/clock.png" />25 de fevereiro de 2019</h5>
-							<p class="tx-justify"><span class="image left"><img
-										class="aligncenter size-full wp-image-423"
-										src="http://apoema.inf.ufg.br/noticias/wp-content/uploads/2019/02/WhatsApp-Image-2019-02-25-at-16.01.08.jpeg"
-										alt="WhatsApp Image 2019-02-25 at 16.01.08" /></span>Confira o edital para
-								participar do processo de seleção:</p>
-
-							<a href="http://apoema.inf.ufg.br/noticias/wp-content/uploads/2019/02/Edital-DESIGN-para-Seleção-de-Bolsistas_QualiVida.pdf"
-								rel="">Edital para Seleção de Bolsistas</a> - Função de Design.
+							<h2 id="tituloPublicacoes2"></h2>
+							<table style="width: 65%">
+								<tr>
+									<th>
+										<h5 id="dataPublicacaoPublicacoes2"></h5>
+									</th>
+									<th>
+										<h5 id="autorPublicacaoPublicacoes2"></h5>
+									</th>
+								</tr>
+							</table>
+							<img id="imagemPublicacoes2" class="image left" alt="" />
+							<p id="descricaoPublicacoes2" class="tx-justify"></p>
 						</div>
 					</div>
 				</section>
+				<div class="ap-div-button">
+					<div style="float: left;">
+						<a id="btnProximoPublicacoes" class="button" onclick="buscaPublicacoesProximo()">Próximo</a>
+					</div>
+					<div style="float: right;">
+						<a id="btnAnteriorPublicacoes" class="button" onclick="buscaPublicacoesAnterior()">Anterior</a>
+					</div>
+				</div>
 			</section>
-			<!--<section>
-				<div class="col-2" style="text-align: right; margin: 6px; margin-bottom: 6px;">
-					<a target="_blank" class="button" onclick="buscaNoticias()">Anterior</a>
-				</div>
-			</section>-->
-		</section>
-
-		<!-- Contato -->
-		<section id="contato" class="wrapper style2 fade-up">
-			<div class="inner">
-				<h2>Contato</h2>
-				<div class="split style1">
-					<section>
-						<form id="myform" method="post">
-							<div class="fields">
-								<div class="field half">
-									<label for="name">Nome</label>
-									<input type="text" name="nome" id="nome" required />
-								</div>
-								<div class="field half">
-									<label for="email">Email</label>
-									<input type="text" name="email" id="email" required />
-								</div>
-								<div class="field">
-									<label for="message">Mensagem</label>
-									<textarea name="mensagem" id="mensagem" rows="5" required></textarea>
-								</div>
-							</div>
-							<ul class="actions">
-								<li><a href="" class="button submit">Enviar mensagem</a></li>
-							</ul>
-						</form>
-						<div id="card-feeback">
-							<p id="feedback-form"></p>
-						</div>
-					</section>
-					<section>
-						<ul class="contact">
-							<li>
-								<h3>Endereço</h3>
-								<span>Alameda Palmeiras, Quadra D, Câmpus Samambaia <br />
-									Instituto de Informática (INF) - UFG, Sala 244<br />
-									Goiânia - GO</span>
-							</li>
-							<li>
-								<h3>Email</h3>
-								<a href="#">apoema@inf.ufg.br</a>
-							</li>
-							<li>
-								<h3>Phone</h3>
-								<span>+55 (62) 3521-1724 </span>
-							</li>
-							<li>
-								<h3>Social</h3>
-								<ul class="icons">
-									<li><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="fa-facebook"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="fa-github"><span class="label">GitHub</span></a></li>
-									<li><a href="#" class="fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="fa-linkedin"><span class="label">LinkedIn</span></a></li>
-								</ul>
-							</li>
-						</ul>
-					</section>
-				</div>
-			</div>
 		</section>
 
 	</div>
