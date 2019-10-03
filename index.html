@@ -95,7 +95,7 @@
 				document.getElementById("dataPublicacaoPublicacoes1").innerHTML = data.getDate() + ' de ' + months[data.getMonth()] + ' de ' + data.getFullYear();
 				document.getElementById("autorPublicacaoPublicacoes1").innerHTML = 'Por: ' + arrayPublicacoes[contP].autor;
 				document.getElementById("imagemPublicacoes1").setAttribute("src", arrayPublicacoes[contP].imagem);
-				cont++;
+				contP++;
 				document.getElementById("tituloPublicacoes2").innerHTML = arrayPublicacoes[contP].titulo;
 				document.getElementById("descricaoPublicacoes2").innerHTML = arrayPublicacoes[contP].descricao;
 				data = arrayPublicacoes[contP].data_publicacao.toDate();
